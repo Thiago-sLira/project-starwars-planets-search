@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 
 function useFetch() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState(null);
   const [planetsData, setPlanetsData] = useState([]);
 
   const makeFetch = () => {
-    setIsLoading(true);
     fetch('https://swapi.dev/api/planets')
       .then((result) => result.json())
       .then(({ results }) => {
@@ -16,7 +15,7 @@ function useFetch() {
         setPlanetsData(results);
       })
       .catch((error) => setErrors(error))
-      .finally(setIsLoading(false));
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {

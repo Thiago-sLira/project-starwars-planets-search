@@ -12,18 +12,30 @@ function PlanetsProvider({ children }) {
     if (filterByName.length === 0) {
       setShowPlanets(planetsData);
     } else {
-      const filter = planetsData.filter(({ name }) => (
+      const filteredPlanets = planetsData.filter(({ name }) => (
         name.toLowerCase().includes(filterByName.toLowerCase())));
-      setShowPlanets(filter);
+      setShowPlanets(filteredPlanets);
     }
+  };
+
+  const filterPlanetsByNumbers = ({ comparisonFilter, columnFilter, valueFilter }) => {
+    const filteredPlanets = planetsData.filter((planet) => {
+      if (comparisonFilter === 'maior que') {
+        return Number(planet[columnFilter]) > Number(valueFilter);
+      } if (comparisonFilter === 'menor que') {
+        return Number(planet[columnFilter]) < Number(valueFilter);
+      }
+      return Number(planet[columnFilter]) === Number(valueFilter);
+    });
+    setShowPlanets(filteredPlanets);
   };
 
   useEffect(() => {
     filterPlanetsByName();
-  }, [filterByName]);
+  }, [filterByName, planetsData]);
 
   const values = useMemo(() => ({
-    isLoading, errors, showPlanets, setFilterByName, filterByName,
+    isLoading, errors, showPlanets, setFilterByName, filterByName, filterPlanetsByNumbers,
   }), [isLoading, errors, filterByName, showPlanets]);
 
   return (

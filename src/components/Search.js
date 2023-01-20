@@ -13,7 +13,8 @@ function Search() {
       <label htmlFor="search-planets-input">
         <h3>Project StarWars Planets</h3>
         <input
-          type="search-planets-input"
+          id="search-planets-input"
+          type="text"
           value={ filterByName }
           name="filterByName"
           onChange={ handleChange }

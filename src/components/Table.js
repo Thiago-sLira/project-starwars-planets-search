@@ -5,27 +5,28 @@ function Table() {
   const { isLoading, showPlanets } = useContext(PlanetsContext);
   console.log(showPlanets);
   return (
-    <table>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Rotation Period</th>
-          <th scope="col">Orbital Period</th>
-          <th scope="col">Diameter</th>
-          <th scope="col">Climate</th>
-          <th scope="col">Gravity</th>
-          <th scope="col">Terrain</th>
-          <th scope="col">Surface Water</th>
-          <th scope="col">Population</th>
-          <th scope="col">Films</th>
-          <th scope="col">Created</th>
-          <th scope="col">Edited</th>
-          <th scope="col">URL</th>
-        </tr>
-      </thead>
-      <tbody>
-        {isLoading ? <h2>Carregando...</h2> : (
-          showPlanets.map((planet) => (
+    <div>
+      {isLoading && <h3>Carregando...</h3> }
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Rotation Period</th>
+            <th scope="col">Orbital Period</th>
+            <th scope="col">Diameter</th>
+            <th scope="col">Climate</th>
+            <th scope="col">Gravity</th>
+            <th scope="col">Terrain</th>
+            <th scope="col">Surface Water</th>
+            <th scope="col">Population</th>
+            <th scope="col">Films</th>
+            <th scope="col">Created</th>
+            <th scope="col">Edited</th>
+            <th scope="col">URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          { showPlanets.map((planet) => (
             <tr key={ planet.name }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
@@ -41,10 +42,10 @@ function Table() {
               <td>{planet.edited}</td>
               <td>{planet.url}</td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
