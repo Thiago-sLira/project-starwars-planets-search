@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
-  const { isLoading, planetsData } = useContext(PlanetsContext);
-  console.log(planetsData);
+  const { isLoading, showPlanets } = useContext(PlanetsContext);
+  console.log(showPlanets);
   return (
     <table>
       <thead>
@@ -25,7 +25,7 @@ function Table() {
       </thead>
       <tbody>
         {isLoading ? <h2>Carregando...</h2> : (
-          planetsData.map((planet) => (
+          showPlanets.map((planet) => (
             <tr key={ planet.name }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
