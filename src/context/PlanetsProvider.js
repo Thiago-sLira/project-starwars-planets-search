@@ -19,7 +19,7 @@ function PlanetsProvider({ children }) {
   };
 
   const filterPlanetsByNumbers = ({ comparisonFilter, columnFilter, valueFilter }) => {
-    const filteredPlanets = planetsData.filter((planet) => {
+    const filteredPlanets = showPlanets.filter((planet) => {
       if (comparisonFilter === 'maior que') {
         return Number(planet[columnFilter]) > Number(valueFilter);
       } if (comparisonFilter === 'menor que') {

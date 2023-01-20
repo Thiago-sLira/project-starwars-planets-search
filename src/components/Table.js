@@ -3,7 +3,6 @@ import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
   const { isLoading, showPlanets } = useContext(PlanetsContext);
-  console.log(showPlanets);
   return (
     <div>
       {isLoading && <h3>Carregando...</h3> }
