@@ -1,10 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useMemo, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
+import useFilterByNumbers from '../hooks/useFilterByNumbers';
 import PlanetsContext from './PlanetsContext';
 
 function PlanetsProvider({ children }) {
   const { isLoading, errors, planetsData } = useFetch();
+  const { filterColumn, filtersUsed, updateFilterColumn } = useFilterByNumbers();
   const [filterByName, setFilterByName] = useState('');
   const [showPlanets, setShowPlanets] = useState([]);
 
@@ -19,6 +21,7 @@ function PlanetsProvider({ children }) {
   };
 
   const filterPlanetsByNumbers = ({ comparisonFilter, columnFilter, valueFilter }) => {
+    updateFilterColumn(comparisonFilter, columnFilter, valueFilter);
     const filteredPlanets = showPlanets.filter((planet) => {
       if (comparisonFilter === 'maior que') {
         return Number(planet[columnFilter]) > Number(valueFilter);
@@ -41,6 +44,8 @@ function PlanetsProvider({ children }) {
     setFilterByName,
     filterByName,
     filterPlanetsByNumbers,
+    filterColumn,
+    filtersUsed,
   }), [isLoading, errors, filterByName, showPlanets]);
 
   return (
