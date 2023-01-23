@@ -4,11 +4,12 @@ import PlanetsContext from '../context/PlanetsContext';
 function Filter() {
   const {
     handleAddFilterClick, filterColumn, filtersUsed, handleRemoveFilterClick,
+    handleRemoveAllFilters,
   } = useContext(PlanetsContext);
   const [filterInputs, setFilterInputs] = useState({
-    columnFilter: 'population',
-    comparisonFilter: 'maior que',
-    valueFilter: 0,
+    column: 'population',
+    comparison: 'maior que',
+    value: 0,
   });
 
   const handleChange = ({ target }) => {
@@ -20,11 +21,20 @@ function Filter() {
 
   const handleClickFilter = () => {
     setFilterInputs({
-      columnFilter: filterColumn.length === 0 ? filterColumn[0] : filterColumn[1],
-      comparisonFilter: 'maior que',
-      valueFilter: 0,
+      column: filterColumn[filterColumn.length - 1],
+      comparison: 'maior que',
+      value: 0,
     });
     handleAddFilterClick(filterInputs);
+  };
+
+  const hadleRemoveClick = ({ target: { name: column } }) => {
+    handleRemoveFilterClick(column);
+    setFilterInputs({
+      column: filterColumn[filterColumn.length - 1],
+      comparison: 'maior que',
+      value: 0,
+    });
   };
 
   return (
@@ -36,8 +46,8 @@ function Filter() {
             data-testid="column-filter"
             id="filter-column"
             onChange={ handleChange }
-            value={ filterInputs.columnFilter }
-            name="columnFilter"
+            value={ filterInputs.column }
+            name="column"
           >
             { filterColumn.length !== 0 && filterColumn.map((column, index) => (
               <option key={ index } value={ column }>{column}</option>
@@ -49,8 +59,8 @@ function Filter() {
             data-testid="comparison-filter"
             id="filter-comparison"
             onChange={ handleChange }
-            value={ filterInputs.comparisonFilter }
-            name="comparisonFilter"
+            value={ filterInputs.comparison }
+            name="comparison"
           >
             <option value="maior que">maior que</option>
             <option value="menor que">menor que</option>
@@ -61,8 +71,8 @@ function Filter() {
           <input
             id="filter-value"
             type="number"
-            value={ filterInputs.valueFilter }
-            name="valueFilter"
+            value={ filterInputs.value }
+            name="value"
             onChange={ handleChange }
             data-testid="value-filter"
             min={ 0 }
@@ -76,6 +86,13 @@ function Filter() {
         >
           Filter
         </button>
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ handleRemoveAllFilters }
+        >
+          Remover todas filtragens
+        </button>
       </section>
       <ul>
         { filtersUsed.length !== 0
@@ -85,7 +102,7 @@ function Filter() {
             <button
               type="button"
               name={ column }
-              onClick={ handleRemoveFilterClick }
+              onClick={ hadleRemoveClick }
             >
               X
             </button>

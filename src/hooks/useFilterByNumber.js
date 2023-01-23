@@ -3,16 +3,14 @@ import { useState } from 'react';
 function useFilterByNumber() {
   const [showPlanets, setShowPlanets] = useState([]);
 
-  const filterPlanetsByNumbers = ({
-    comparisonFilter, columnFilter, valueFilter,
-  }, array = []) => {
+  const filterPlanetsByNumbers = ({ comparison, column, value }, array = []) => {
     const filteredPlanets = array.filter((planet) => {
-      if (comparisonFilter === 'maior que') {
-        return Number(planet[columnFilter]) > Number(valueFilter);
-      } if (comparisonFilter === 'menor que') {
-        return Number(planet[columnFilter]) < Number(valueFilter);
+      if (comparison === 'maior que') {
+        return Number(planet[column]) > Number(value);
+      } if (comparison === 'menor que') {
+        return Number(planet[column]) < Number(value);
       }
-      return Number(planet[columnFilter]) === Number(valueFilter);
+      return Number(planet[column]) === Number(value);
     });
     setShowPlanets(filteredPlanets);
   };

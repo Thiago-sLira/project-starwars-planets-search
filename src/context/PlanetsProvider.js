@@ -2,16 +2,34 @@
 import { useState, useMemo, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 import useFilterByNumber from '../hooks/useFilterByNumber';
-import useUpdateColumnFilter from '../hooks/useUpdateColumnFilter';
 import PlanetsContext from './PlanetsContext';
 
 function PlanetsProvider({ children }) {
+  const columnArray = [
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
+  ];
   const { isLoading, errors, planetsData } = useFetch();
-  const {
-    filterColumn, filtersUsed, updateFilterColumn, removeFilterColumn,
-  } = useUpdateColumnFilter();
-  const [filterByName, setFilterByName] = useState('');
   const { filterPlanetsByNumbers, showPlanets, setShowPlanets } = useFilterByNumber();
+  const [filterColumn, setFilterColumn] = useState(columnArray);
+  const [filtersUsed, setFiltersUsed] = useState([]);
+  const [filterByName, setFilterByName] = useState('');
+
+  const removeFilterColumn = (column, updatedFiltersUsed) => {
+    setFilterColumn([...filterColumn, column]);
+    setFiltersUsed(updatedFiltersUsed);
+  };
+
+  const updateFilterColumn = ({ comparison, column, value }) => {
+    setFilterColumn(filterColumn.filter((element) => element !== column));
+    setFiltersUsed([
+      ...filtersUsed,
+      {
+        column,
+        comparison,
+        value,
+      },
+    ]);
+  };
 
   const filterPlanetsByName = () => {
     if (filterByName.length === 0) {
@@ -28,15 +46,22 @@ function PlanetsProvider({ children }) {
     updateFilterColumn(filterInputs);
   };
 
-  const handleRemoveFilterClick = ({ target: { name: column } }) => {
+  const handleRemoveFilterClick = (column) => {
+    setShowPlanets(planetsData);
     const updatedFiltersUsed = filtersUsed.filter((filter) => filter.column !== column);
     removeFilterColumn(column, updatedFiltersUsed);
+  };
+
+  useEffect(() => {
+    filtersUsed.forEach((filters) => {
+      filterPlanetsByNumbers(filters, showPlanets);
+    });
+  }, [filtersUsed]);
+
+  const handleRemoveAllFilters = () => {
     setShowPlanets(planetsData);
-    if (updatedFiltersUsed.length !== 0) {
-      updatedFiltersUsed.forEach((filters) => {
-        filterPlanetsByNumbers(filters, showPlanets);
-      });
-    }
+    setFilterColumn(columnArray);
+    setFiltersUsed([]);
   };
 
   useEffect(() => {
@@ -53,6 +78,7 @@ function PlanetsProvider({ children }) {
     filterColumn,
     filtersUsed,
     handleRemoveFilterClick,
+    handleRemoveAllFilters,
   }), [isLoading, errors, filterByName, showPlanets]);
 
   return (
