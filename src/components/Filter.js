@@ -19,12 +19,16 @@ function Filter() {
   };
 
   const handleClickFilter = () => {
-    filterPlanetsByNumbers({ ...filterInputs });
+    setFilterInputs({
+      columnFilter: filterColumn[1],
+      comparisonFilter: 'maior que',
+      valueFilter: 0,
+    });
+    filterPlanetsByNumbers(filterInputs);
   };
 
   return (
     <div>
-
       <section>
         <h3>Filtros</h3>
         <label htmlFor="filter-column">
