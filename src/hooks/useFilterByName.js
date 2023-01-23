@@ -1,10 +1,11 @@
-// import React from 'react';
+// import { useState } from 'react';
 
 // function useFilterByName() {
+//   const [filterName, setFilterName] = useState('');
 //   console.log('chamando');
-//   return (
-//     <div>useFilterByName</div>
-//   );
+//   return {
+//     filterName, setFilterName,
+//   };
 // }
 
 // export default useFilterByName;

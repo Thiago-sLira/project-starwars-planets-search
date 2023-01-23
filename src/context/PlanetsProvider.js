@@ -35,7 +35,12 @@ function PlanetsProvider({ children }) {
   }, [filterByName, planetsData]);
 
   const values = useMemo(() => ({
-    isLoading, errors, showPlanets, setFilterByName, filterByName, filterPlanetsByNumbers,
+    isLoading,
+    errors,
+    showPlanets,
+    setFilterByName,
+    filterByName,
+    filterPlanetsByNumbers,
   }), [isLoading, errors, filterByName, showPlanets]);
 
   return (

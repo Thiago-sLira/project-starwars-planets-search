@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Filter() {
-  const { filterPlanetsByNumbers } = useContext(PlanetsContext);
+  const { filterPlanetsByNumbers, setFilterName } = useContext(PlanetsContext);
   const [filterInputs, setFilterInputs] = useState({
     columnFilter: 'population',
     comparisonFilter: 'maior que',
@@ -69,6 +69,7 @@ function Filter() {
       >
         Filter
       </button>
+      <button type="button" onClick={ setFilterName }>Clica</button>
     </section>
   );
 }
