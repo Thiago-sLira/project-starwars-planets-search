@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useMemo, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
+import useFilterByNumber from '../hooks/useFilterByNumber';
 import useUpdateColumnFilter from '../hooks/useUpdateColumnFilter';
 import PlanetsContext from './PlanetsContext';
 
@@ -10,7 +11,7 @@ function PlanetsProvider({ children }) {
     filterColumn, filtersUsed, updateFilterColumn, removeFilterColumn,
   } = useUpdateColumnFilter();
   const [filterByName, setFilterByName] = useState('');
-  const [showPlanets, setShowPlanets] = useState([]);
+  const { filterPlanetsByNumbers, showPlanets, setShowPlanets } = useFilterByNumber();
 
   const filterPlanetsByName = () => {
     if (filterByName.length === 0) {
@@ -22,31 +23,20 @@ function PlanetsProvider({ children }) {
     }
   };
 
-  const filterPlanetsByNumbers = ({
-    comparisonFilter, columnFilter, valueFilter,
-  }, array = []) => {
-    const filteredPlanets = array.filter((planet) => {
-      if (comparisonFilter === 'maior que') {
-        return Number(planet[columnFilter]) > Number(valueFilter);
-      } if (comparisonFilter === 'menor que') {
-        return Number(planet[columnFilter]) < Number(valueFilter);
-      }
-      return Number(planet[columnFilter]) === Number(valueFilter);
-    });
-    return filteredPlanets;
-  };
-
   const handleAddFilterClick = (filterInputs) => {
-    setShowPlanets(filterPlanetsByNumbers(filterInputs, showPlanets));
+    filterPlanetsByNumbers(filterInputs, showPlanets);
     updateFilterColumn(filterInputs);
   };
 
   const handleRemoveFilterClick = ({ target: { name: column } }) => {
     const updatedFiltersUsed = filtersUsed.filter((filter) => filter.column !== column);
     removeFilterColumn(column, updatedFiltersUsed);
-    updatedFiltersUsed.forEach((filters) => {
-      setShowPlanets(filterPlanetsByNumbers(filters, planetsData));
-    });
+    setShowPlanets(planetsData);
+    if (updatedFiltersUsed.length !== 0) {
+      updatedFiltersUsed.forEach((filters) => {
+        filterPlanetsByNumbers(filters, showPlanets);
+      });
+    }
   };
 
   useEffect(() => {
