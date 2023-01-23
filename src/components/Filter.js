@@ -3,7 +3,7 @@ import PlanetsContext from '../context/PlanetsContext';
 
 function Filter() {
   const {
-    filterPlanetsByNumbers, filterColumn, filtersUsed,
+    handleAddFilterClick, filterColumn, filtersUsed, handleRemoveFilterClick,
   } = useContext(PlanetsContext);
   const [filterInputs, setFilterInputs] = useState({
     columnFilter: 'population',
@@ -20,11 +20,11 @@ function Filter() {
 
   const handleClickFilter = () => {
     setFilterInputs({
-      columnFilter: filterColumn[1],
+      columnFilter: filterColumn.length === 0 ? filterColumn[0] : filterColumn[1],
       comparisonFilter: 'maior que',
       valueFilter: 0,
     });
-    filterPlanetsByNumbers(filterInputs);
+    handleAddFilterClick(filterInputs);
   };
 
   return (
@@ -78,10 +78,17 @@ function Filter() {
         </button>
       </section>
       <ul>
-        { filtersUsed.length !== 0 && filtersUsed.map((column, index) => (
-          <li key={ index }>
-            <p>{ column }</p>
-            <button type="button">Excluir Filtro</button>
+        { filtersUsed.length !== 0
+        && filtersUsed.map(({ column, comparison, value }, index) => (
+          <li key={ index } data-testid="filter">
+            <p>{ `${column} ${comparison} ${value}` }</p>
+            <button
+              type="button"
+              name={ column }
+              onClick={ handleRemoveFilterClick }
+            >
+              X
+            </button>
           </li>
         )) }
       </ul>

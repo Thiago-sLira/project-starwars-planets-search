@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useMemo, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
-import useFilterByNumbers from '../hooks/useFilterByNumbers';
+import useUpdateColumnFilter from '../hooks/useUpdateColumnFilter';
 import PlanetsContext from './PlanetsContext';
 
 function PlanetsProvider({ children }) {
   const { isLoading, errors, planetsData } = useFetch();
-  const { filterColumn, filtersUsed, updateFilterColumn } = useFilterByNumbers();
+  const {
+    filterColumn, filtersUsed, updateFilterColumn, removeFilterColumn,
+  } = useUpdateColumnFilter();
   const [filterByName, setFilterByName] = useState('');
   const [showPlanets, setShowPlanets] = useState([]);
 
@@ -20,9 +22,10 @@ function PlanetsProvider({ children }) {
     }
   };
 
-  const filterPlanetsByNumbers = ({ comparisonFilter, columnFilter, valueFilter }) => {
-    updateFilterColumn(comparisonFilter, columnFilter, valueFilter);
-    const filteredPlanets = showPlanets.filter((planet) => {
+  const filterPlanetsByNumbers = ({
+    comparisonFilter, columnFilter, valueFilter,
+  }, array = []) => {
+    const filteredPlanets = array.filter((planet) => {
       if (comparisonFilter === 'maior que') {
         return Number(planet[columnFilter]) > Number(valueFilter);
       } if (comparisonFilter === 'menor que') {
@@ -30,7 +33,20 @@ function PlanetsProvider({ children }) {
       }
       return Number(planet[columnFilter]) === Number(valueFilter);
     });
-    setShowPlanets(filteredPlanets);
+    return filteredPlanets;
+  };
+
+  const handleAddFilterClick = (filterInputs) => {
+    setShowPlanets(filterPlanetsByNumbers(filterInputs, showPlanets));
+    updateFilterColumn(filterInputs);
+  };
+
+  const handleRemoveFilterClick = ({ target: { name: column } }) => {
+    const updatedFiltersUsed = filtersUsed.filter((filter) => filter.column !== column);
+    removeFilterColumn(column, updatedFiltersUsed);
+    updatedFiltersUsed.forEach((filters) => {
+      setShowPlanets(filterPlanetsByNumbers(filters, planetsData));
+    });
   };
 
   useEffect(() => {
@@ -43,9 +59,10 @@ function PlanetsProvider({ children }) {
     showPlanets,
     setFilterByName,
     filterByName,
-    filterPlanetsByNumbers,
+    handleAddFilterClick,
     filterColumn,
     filtersUsed,
+    handleRemoveFilterClick,
   }), [isLoading, errors, filterByName, showPlanets]);
 
   return (
