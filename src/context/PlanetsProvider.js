@@ -64,6 +64,10 @@ function PlanetsProvider({ children }) {
     setFiltersUsed([]);
   };
 
+  const handleSortClick = (order) => {
+    console.log(order);
+  };
+
   useEffect(() => {
     filterPlanetsByName();
   }, [filterByName, planetsData]);
@@ -79,7 +83,12 @@ function PlanetsProvider({ children }) {
     filtersUsed,
     handleRemoveFilterClick,
     handleRemoveAllFilters,
-  }), [isLoading, errors, filterByName, showPlanets]);
+    columnArray,
+    handleSortClick,
+  }), [
+    isLoading, errors, showPlanets, columnArray,
+    filterColumn, filtersUsed, filterByName,
+  ]);
 
   return (
     <PlanetsContext.Provider value={ values }>

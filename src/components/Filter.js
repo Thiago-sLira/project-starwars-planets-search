@@ -4,17 +4,27 @@ import PlanetsContext from '../context/PlanetsContext';
 function Filter() {
   const {
     handleAddFilterClick, filterColumn, filtersUsed, handleRemoveFilterClick,
-    handleRemoveAllFilters,
+    handleRemoveAllFilters, columnArray, handleSortClick,
   } = useContext(PlanetsContext);
   const [filterInputs, setFilterInputs] = useState({
     column: 'population',
     comparison: 'maior que',
     value: 0,
   });
+  const [order, setOrder] = useState({
+    column: 'population', sort: 'ASC',
+  });
 
-  const handleChange = ({ target }) => {
+  const handleChangeFilter = ({ target }) => {
     setFilterInputs({
       ...filterInputs,
+      [target.name]: target.value,
+    });
+  };
+
+  const handleChangeOrder = ({ target }) => {
+    setOrder({
+      ...order,
       [target.name]: target.value,
     });
   };
@@ -45,7 +55,7 @@ function Filter() {
           <select
             data-testid="column-filter"
             id="filter-column"
-            onChange={ handleChange }
+            onChange={ handleChangeFilter }
             value={ filterInputs.column }
             name="column"
           >
@@ -58,7 +68,7 @@ function Filter() {
           <select
             data-testid="comparison-filter"
             id="filter-comparison"
-            onChange={ handleChange }
+            onChange={ handleChangeFilter }
             value={ filterInputs.comparison }
             name="comparison"
           >
@@ -73,7 +83,7 @@ function Filter() {
             type="number"
             value={ filterInputs.value }
             name="value"
-            onChange={ handleChange }
+            onChange={ handleChangeFilter }
             data-testid="value-filter"
             min={ 0 }
           />
@@ -86,14 +96,58 @@ function Filter() {
         >
           Filter
         </button>
+      </section>
+      <br />
+      <section>
+        <label htmlFor="sort-column">
+          <select
+            data-testid="column-sort"
+            id="sort-column"
+            onChange={ handleChangeOrder }
+            value={ order.column }
+            name="column"
+          >
+            { columnArray.map((column, index) => (
+              <option key={ index } value={ column }>{column}</option>
+            )) }
+          </select>
+        </label>
+        <label htmlFor="sort-radios">
+          Ascendente
+          <input
+            type="radio"
+            data-testid="column-sort-input-asc"
+            id="sort-radios"
+            onChange={ handleChangeOrder }
+            value="ASC"
+            name="sort"
+          />
+          Descendente
+          <input
+            type="radio"
+            data-testid="column-sort-input-desc"
+            id="sort-radios"
+            onChange={ handleChangeOrder }
+            value="DESC"
+            name="sort"
+          />
+        </label>
         <button
           type="button"
-          data-testid="button-remove-filters"
-          onClick={ handleRemoveAllFilters }
+          data-testid="column-sort-button"
+          onClick={ () => handleSortClick(order) }
         >
-          Remover todas filtragens
+          Ordenar
         </button>
       </section>
+      <br />
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ handleRemoveAllFilters }
+      >
+        Remover todas filtragens
+      </button>
       <ul>
         { filtersUsed.length !== 0
         && filtersUsed.map(({ column, comparison, value }, index) => (
