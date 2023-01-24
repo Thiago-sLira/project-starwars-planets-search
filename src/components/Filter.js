@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Filter() {
@@ -29,12 +29,15 @@ function Filter() {
     });
   };
 
-  const handleClickFilter = () => {
+  useEffect(() => {
     setFilterInputs({
-      column: filterColumn[filterColumn.length - 1],
+      column: filterColumn[0],
       comparison: 'maior que',
       value: 0,
     });
+  }, [filterColumn]);
+
+  const handleClickFilter = () => {
     handleAddFilterClick(filterInputs);
   };
 
@@ -157,6 +160,7 @@ function Filter() {
               type="button"
               name={ column }
               onClick={ hadleRemoveClick }
+              data-testid={ `remove-filter-${column}` }
             >
               X
             </button>

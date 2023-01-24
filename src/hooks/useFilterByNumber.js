@@ -3,7 +3,7 @@ import { useState } from 'react';
 function useFilterByNumber() {
   const [showPlanets, setShowPlanets] = useState([]);
 
-  const filterPlanetsByNumbers = ({ comparison, column, value }, array = []) => {
+  const filterPlanetsByNumbers = ({ comparison, column, value }, array) => {
     const filteredPlanets = array.filter((planet) => {
       if (comparison === 'maior que') {
         return Number(planet[column]) > Number(value);

@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
-  const { isLoading, showPlanets } = useContext(PlanetsContext);
+  const { isLoading, showPlanets, errors } = useContext(PlanetsContext);
   return (
     <div>
+      { errors && <h3>Deu ruim na requisição!!</h3> }
       {isLoading && <h3>Carregando...</h3> }
       <table>
         <thead>
