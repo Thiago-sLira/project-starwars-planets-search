@@ -4,6 +4,7 @@ import useFetch from '../hooks/useFetch';
 import useFilterByNumber from '../hooks/useFilterByNumber';
 import PlanetsContext from './PlanetsContext';
 
+const MINUS_ONE = -1;
 function PlanetsProvider({ children }) {
   const columnArray = [
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
@@ -64,8 +65,40 @@ function PlanetsProvider({ children }) {
     setFiltersUsed([]);
   };
 
+  const sortPlanetsArrayDESC = ({ column }) => {
+    const arraySortedDESC = planetsData.sort((a, b) => {
+      if (!Number.isNaN(+(a[column])) && !Number.isNaN(+(b[column]))) {
+        return +(b[column]) - +(a[column]);
+      } if (Number.isNaN(+(a[column])) && Number.isNaN(+(b[column]))) {
+        return 0;
+      } if (Number.isNaN(+(a[column]))) {
+        return 1;
+      }
+      return MINUS_ONE;
+    });
+    setShowPlanets([...arraySortedDESC]);
+  };
+
+  const sortPlanetsArrayASC = ({ column }) => {
+    const arraySortedASC = planetsData.sort((a, b) => {
+      if (!Number.isNaN(+(a[column])) && !Number.isNaN(+(b[column]))) {
+        return +(a[column]) - +(b[column]);
+      } if (Number.isNaN(+(a[column])) && Number.isNaN(+(b[column]))) {
+        return 0;
+      } if (Number.isNaN(+(a[column]))) {
+        return 1;
+      }
+      return MINUS_ONE;
+    });
+    setShowPlanets([...arraySortedASC]);
+  };
+
   const handleSortClick = (order) => {
-    console.log(order);
+    if (order.sort === 'ASC') {
+      sortPlanetsArrayASC(order);
+    } else {
+      sortPlanetsArrayDESC(order);
+    }
   };
 
   useEffect(() => {
