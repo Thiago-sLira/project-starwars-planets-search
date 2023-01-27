@@ -4,7 +4,7 @@ import PlanetsContext from '../context/PlanetsContext';
 function Table() {
   const { isLoading, showPlanets, errors } = useContext(PlanetsContext);
   return (
-    <div>
+    <div className="table">
       { errors && <h3>Deu ruim na requisição!!</h3> }
       {isLoading && <h3>Carregando...</h3> }
       <table>

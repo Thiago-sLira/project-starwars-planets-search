@@ -1,7 +1,84 @@
-/* html {
+@font-face {
+  font-family: Starjedi;
+  src: url('./fonts/Starjedi.ttf');
+}
+
+html {
   text-align: center;
 }
 
 ul {
   text-align: left;
-} */
+}
+
+body {
+  background-color: rgb(100, 100, 100);
+  background-image: url('../fundo-star-wars\ \(1\)\ 1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.table {
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.table::-webkit-scrollbar {
+  background: #444955;
+  border-radius: 20px;
+  height: 7px;
+  width: 7px;
+}
+
+.table::-webkit-scrollbar-corner {
+  background-color: #444955;
+  border-bottom-right-radius: 20px;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background: #1f2227;
+  border-radius: 20px;
+}
+
+thead {
+  left: 0;
+  position: relative;
+  right: 0;
+}
+
+.title-star p {
+  font-family: Starjedi , cursive;
+  font-size: 8em;
+  line-height: 1em;
+  margin: 0;
+}
+
+.title-star > div {
+  align-items: center;
+  border: 1px solid yellow;
+  border-radius: 100%;
+  display: flex;
+  height: 700px;
+  justify-content: center;
+  width: 700px;
+}
+
+.title-star > div > div {
+  border: 1px solid;
+  border-color: (white 0% , rgba(255, 255, 255, 0) 94.26%);
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: center;
+  width: 500px;
+}
+
+.title-star {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: -80px;
+}

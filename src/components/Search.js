@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Search() {
@@ -10,9 +12,8 @@ function Search() {
 
   return (
     <div>
-      <label htmlFor="search-planets-input">
-        <h3>Project StarWars Planets</h3>
-        <input
+      <Box htmlFor="search-planets-input">
+        <TextField
           id="search-planets-input"
           type="text"
           value={ filterByName }
@@ -20,7 +21,7 @@ function Search() {
           onChange={ handleChange }
           data-testid="name-filter"
         />
-      </label>
+      </Box>
     </div>
   );
 }
