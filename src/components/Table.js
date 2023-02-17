@@ -37,7 +37,13 @@ function Table() {
               <td>{planet.terrain}</td>
               <td>{planet.surface_water}</td>
               <td>{planet.population}</td>
-              <td>{planet.films.map((film) => <p key={ film }>{film}</p>)}</td>
+              <td>
+                {planet.films
+                  .map((film) => (
+                    <a key={ film } href={ film }>
+                      {film}
+                    </a>))}
+              </td>
               <td>{planet.created}</td>
               <td>{planet.edited}</td>
               <td>{planet.url}</td>

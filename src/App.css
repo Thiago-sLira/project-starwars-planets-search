@@ -17,6 +17,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
+  font-family: sans-serif;
+}
+
+h1 {
+  font-family: Starjedi , cursive;
 }
 
 .table {
@@ -42,16 +47,31 @@ body {
 }
 
 thead {
+  background-color: #06080c;
+  border: 1px solid wheat;
   left: 0;
   position: relative;
   right: 0;
+}
+
+th {
+  padding: 20px 50px;
+}
+
+tbody {
+  background-color: #1f2227;
+}
+
+td {
+  padding: 20px;
 }
 
 .title-star p {
   font-family: Starjedi , cursive;
   font-size: 8em;
   line-height: 1em;
-  margin: 0;
+  margin: 0;/* -webkit-text-stroke: 2px white;
+  color: rgba(255, 255, 255, 0); */
 }
 
 .title-star > div {
@@ -81,4 +101,21 @@ thead {
   justify-content: center;
   position: relative;
   top: -80px;
+}
+
+#filled-search {
+  border: 2px solid white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 42px;
+  left: 302px;
+  opacity: 0.5;
+  top: 761px;
+  width: 671px;
+}
+
+.filters-numbers {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
 }
