@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
@@ -6,7 +7,7 @@ function Table() {
   return (
     <div className="table">
       { errors && <h3>Deu ruim na requisição!!</h3> }
-      {isLoading && <h3>Carregando...</h3> }
+      {isLoading && <CircularProgress color="success" /> }
       <table>
         <thead>
           <tr>

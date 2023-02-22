@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-// import Paper from '@mui/material/Paper';
-// import SearchIcon from '@mui/icons-material/Search';
-// import IconButton from '@mui/material/IconButton';
-// import InputBase from '@mui/material/InputBase';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Search() {
@@ -34,20 +29,6 @@ function Search() {
           onChange={ handleChange }
           data-testid="name-filter"
         />
-        {/* <Paper
-          component="form"
-          sx={ { p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 } }
-          className="paper-search"
-        >
-          <InputBase
-            sx={ { ml: 1, flex: 1 } }
-            placeholder="Search Planets By Name"
-            onChange={ handleChange }
-          />
-          <IconButton type="button" sx={ { p: '10px' } } aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper> */}
       </Box>
     </div>
   );

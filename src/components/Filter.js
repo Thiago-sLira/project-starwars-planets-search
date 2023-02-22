@@ -1,11 +1,14 @@
+/* eslint-disable max-lines */
 import React, { useState, useContext, useEffect } from 'react';
-// import MenuItem from '@mui/material/MenuItem';
-// import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
+import Button from '@mui/material/Button';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
 import PlanetsContext from '../context/PlanetsContext';
 
+const biggerThan = 'bigger than';
 function Filter() {
   const {
     handleAddFilterClick, filterColumn, filtersUsed, handleRemoveFilterClick,
@@ -13,7 +16,7 @@ function Filter() {
   } = useContext(PlanetsContext);
   const [filterInputs, setFilterInputs] = useState({
     column: 'population',
-    comparison: 'maior que',
+    comparison: biggerThan,
     value: 0,
   });
   const [order, setOrder] = useState({
@@ -37,7 +40,7 @@ function Filter() {
   useEffect(() => {
     setFilterInputs({
       column: filterColumn[0],
-      comparison: 'maior que',
+      comparison: biggerThan,
       value: 0,
     });
   }, [filterColumn]);
@@ -50,14 +53,14 @@ function Filter() {
     handleRemoveFilterClick(column);
     setFilterInputs({
       column: filterColumn[filterColumn.length - 1],
-      comparison: 'maior que',
+      comparison: 'bigger than',
       value: 0,
     });
   };
 
   return (
     <div>
-      <h1>Filtros</h1>
+      <h1>Filters</h1>
       <section className="filters-numbers">
         <FormControl sx={ { m: 1 } }>
           <InputLabel
@@ -98,19 +101,58 @@ function Filter() {
             )) }
           </NativeSelect>
         </FormControl>
-        <label htmlFor="filter-comparison">
-          <select
+        <FormControl sx={ { m: 1 } }>
+          <InputLabel
+            htmlFor="filter-comparison"
+            variant="standard"
+            color="warning"
+            sx={ {
+              color: '#f3e3f5',
+            } }
+          >
+            Comparison
+          </InputLabel>
+          <NativeSelect
+            labelId="filter-comparison"
             data-testid="comparison-filter"
             id="filter-comparison"
             onChange={ handleChangeFilter }
             value={ filterInputs.comparison }
+            inputProps={ {
+              name: 'comparison',
+              id: 'filter-comparison',
+            } }
             name="comparison"
+            sx={ {
+              color: 'white',
+            } }
           >
-            <option value="maior que">maior que</option>
-            <option value="menor que">menor que</option>
-            <option value="igual a">igual a</option>
-          </select>
-        </label>
+            <option
+              value={ biggerThan }
+              style={ {
+                backgroundColor: 'black',
+              } }
+            >
+              bigger than
+            </option>
+            <option
+              value="smaller than"
+              style={ {
+                backgroundColor: 'black',
+              } }
+            >
+              smaller than
+            </option>
+            <option
+              value="equal to"
+              style={ {
+                backgroundColor: 'black',
+              } }
+            >
+              equal to
+            </option>
+          </NativeSelect>
+        </FormControl>
         <label htmlFor="filter-value">
           <input
             id="filter-value"
@@ -122,76 +164,133 @@ function Filter() {
             min={ 0 }
           />
         </label>
-        <button
+        <Button
           type="button"
           data-testid="button-filter"
           onClick={ handleClickFilter }
           disabled={ filterColumn.length === 0 }
+          variant="outlined"
+          sx={ {
+            border: '3px solid yellow',
+            color: 'yellow',
+          } }
         >
           Filter
-        </button>
-        <label htmlFor="sort-column">
-          <select
+        </Button>
+        <FormControl sx={ { m: 1 } }>
+          <InputLabel
+            htmlFor="sort-column"
+            variant="standard"
+            color="secondary"
+            sx={ {
+              color: '#f3e3f5',
+            } }
+          >
+            SortColumn
+          </InputLabel>
+          <NativeSelect
+            labelId="sort-column"
             data-testid="column-sort"
             id="sort-column"
             onChange={ handleChangeOrder }
             value={ order.column }
+            inputProps={ {
+              name: 'column',
+              id: 'sort-column',
+            } }
             name="column"
+            sx={ {
+              color: 'white',
+            } }
           >
             { columnArray.map((column, index) => (
-              <option key={ index } value={ column }>{column}</option>
+              <option
+                key={ index }
+                value={ column }
+                style={ {
+                  backgroundColor: 'black',
+                } }
+              >
+                {column}
+              </option>
             )) }
-          </select>
-        </label>
-        <label htmlFor="sort-radios">
-          Ascendente
-          <input
+          </NativeSelect>
+        </FormControl>
+        <RadioGroup htmlFor="sort-radios">
+          Ascending
+          <Radio
+            className="radios-sort"
             type="radio"
             data-testid="column-sort-input-asc"
             id="sort-radios"
             onChange={ handleChangeOrder }
             value="ASC"
             name="sort"
+            color="success"
+            sx={ {
+              color: '#f3e3f5',
+            } }
           />
-          Descendente
-          <input
+          Descending
+          <Radio
+            className="radios-sort"
             type="radio"
             data-testid="column-sort-input-desc"
             id="sort-radios"
             onChange={ handleChangeOrder }
             value="DESC"
             name="sort"
+            color="warning"
+            sx={ {
+              color: '#f3e3f5',
+            } }
           />
-        </label>
-        <button
+        </RadioGroup>
+        <Button
           type="button"
           data-testid="column-sort-button"
           onClick={ () => handleSortClick(order) }
+          variant="outlined"
+          sx={ {
+            border: '3px solid yellow',
+            color: 'yellow',
+          } }
         >
-          Ordenar
-        </button>
+          Sort
+        </Button>
       </section>
       <br />
-      <button
+      <Button
         type="button"
         data-testid="button-remove-filters"
         onClick={ handleRemoveAllFilters }
+        variant="outlined"
+        sx={ {
+          border: '2px solid yellow',
+          color: 'yellow',
+        } }
       >
-        Remover todas filtragens
-      </button>
+        Remove all Filters
+      </Button>
       <ul>
         { filtersUsed.length !== 0
         && filtersUsed.map(({ column, comparison, value }, index) => (
           <li key={ index } data-testid="filter">
-            <p>{ `${column} ${comparison} ${value}` }</p>
-            <button
+            <spam className="spam">{ `${column} ${comparison} ${value}` }</spam>
+            {' '}
+            <Button
               type="button"
               name={ column }
               onClick={ hadleRemoveClick }
               data-testid={ `remove-filter-${column}` }
+              variant="outlined"
+              sx={ {
+                border: '1px solid yellow',
+                color: 'yellow',
+              } }
             >
               X
-            </button>
+            </Button>
           </li>
         )) }
       </ul>

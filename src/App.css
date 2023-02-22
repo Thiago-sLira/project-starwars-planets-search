@@ -8,7 +8,18 @@ html {
 }
 
 ul {
-  text-align: left;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  list-style-type: lower-greek;
+}
+
+li {
+  padding: 10px;
+}
+
+.spam {
+  text-transform: uppercase;
 }
 
 body {
@@ -107,11 +118,21 @@ td {
   border: 2px solid white;
   border-radius: 5px;
   box-sizing: border-box;
+  font-size: 20px;
   height: 42px;
   left: 302px;
   opacity: 0.5;
   top: 761px;
   width: 671px;
+}
+
+#filter-value {
+  border: 2px solid white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 17px;
+  opacity: 0.5;
+  width: 140px;
 }
 
 .filters-numbers {

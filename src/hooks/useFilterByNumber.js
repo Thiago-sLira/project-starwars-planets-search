@@ -5,9 +5,9 @@ function useFilterByNumber() {
 
   const filterPlanetsByNumbers = ({ comparison, column, value }, array) => {
     const filteredPlanets = array.filter((planet) => {
-      if (comparison === 'maior que') {
+      if (comparison === 'bigger than') {
         return Number(planet[column]) > Number(value);
-      } if (comparison === 'menor que') {
+      } if (comparison === 'smaller than') {
         return Number(planet[column]) < Number(value);
       }
       return Number(planet[column]) === Number(value);
