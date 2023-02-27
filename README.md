@@ -8,16 +8,8 @@
 <p>A idéia foi fazer uma consulta à uma API externa e trabalhar com os dados recebidos. Até então havia distribuído os dados para toda a aplicação usando Redux, mas dessa vez usei contextAPI e hooks para fazer a requisição e ter os dados salvos no provider para que todos os componentes tivessem acesso.</p>
 <p>O mais desafiados foi entender a lógica por trás das hooks e lidar com a assincronicidade que vem junto delas ao filtrar os dados. Com muitas consultas à documentação, prática e mentorias, consegui concluir o projeto com 100% de aprovação.</p>
 
-# :construction: README customizado em construção ! :construction:
-<!--  Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+<h3>Visual do projeto</h3>
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+<img alt="image-readme" src="./github/StarWarsFilters.png" title="Star-Wars-Planets-Search"/>
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-
- -->
+<p>Fico à disposição para contato, sugestões e feedbacks sobre o projeto.</p>
