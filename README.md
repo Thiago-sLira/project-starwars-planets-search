@@ -1,5 +1,3 @@
-<!-- # :construction: README customizado em construção ! :construction: -->
-
 <h1>Star Wars Planets Search</h1>
 <p>Research on planets in the star wars universe.</p>
 
@@ -9,7 +7,7 @@
 
 
 <h2>🛠️ Construído com</h2>
-<p>Mencione as ferramentas que você usou para criar seu projeto</p>
+
 <span><strong><em>JavaScript</em></strong></span><br>
 <span><strong><em>React</em></strong></span><br>
 <span><strong><em>React Testing Library</em></strong></span><br>
