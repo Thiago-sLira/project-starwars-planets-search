@@ -1,15 +1,25 @@
-<h2>Bem vindo e Bem vinda</h2>
-<h3>Repositório do Star Wars Planets Search</h3>
+<!-- # :construction: README customizado em construção ! :construction: -->
 
-<p>Construí esse projeto como parte do do curso de desenvolvimento web na <a href="https://www.betrybe.com/" target="_blank" alt="Trybe">Trybe</a></p>
+<h1>Star Wars Planets Search</h1>
+<p>Research on planets in the star wars universe.</p>
 
-<h3>Propósito do projetoaaaaaaa</h3>
+<h2>🚀 Objective</h2>
+<p>The idea was to make a query to an external API and work with the received data. Until then, I had distributed the data to the entire application using Redux, but this time I used Context API and hooks to make the request and have the data saved in the provider so that all components could have access.</p><br>
+<p>The most challenging part was understanding the logic behind the hooks and dealing with the asynchrony that comes along with them when filtering the data. With many consultations to the documentation, practice, and mentorship, I was able to complete the project with 100% approval.</p>
 
-<p>A idéia foi fazer uma consulta à uma API externa e trabalhar com os dados recebidos. Até então havia distribuído os dados para toda a aplicação usando Redux, mas dessa vez usei contextAPI e hooks para fazer a requisição e ter os dados salvos no provider para que todos os componentes tivessem acesso.</p>
-<p>O mais desafiados foi entender a lógica por trás das hooks e lidar com a assincronicidade que vem junto delas ao filtrar os dados. Com muitas consultas à documentação, prática e mentorias, consegui concluir o projeto com 100% de aprovação.</p>
 
-<h3>Visual do projeto</h3>
+<h2>🛠️ Construído com</h2>
+<p>Mencione as ferramentas que você usou para criar seu projeto</p>
+<span><strong><em>JavaScript</em></strong></span><br>
+<span><strong><em>React</em></strong></span><br>
+<span><strong><em>React Testing Library</em></strong></span><br>
+<span><strong><em>Context API</em></strong></span><br>
+
+<h3>Project look</h3>
 
 <img alt="image-readme" src="./github/StarWarsFilters.png" title="Star-Wars-Planets-Search"/>
 
-<p>Fico à disposição para contato, sugestões e feedbacks sobre o projeto.</p>
+<p>I am available for contact, suggestions and feedback on the project.</p>
+
+<h2>🎁 Expressions of Gratitude</h2>
+<p>Tell others about this project. 📢
